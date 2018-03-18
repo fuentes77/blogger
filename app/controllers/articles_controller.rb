@@ -7,12 +7,15 @@ class ArticlesController < ApplicationController
 
   def show
 	@article = Article.find(params[:id])
+	@comment = Comment.new
+	@comment.article_id = @article.id
   end 
 
   def create
     @article = Article.new(article_params)
     @article.save
-    redirect_to article_path(@article)
+    #redirect_to article_path(@article)
+    redirect_to action: 'index'
     flash.notice = "Article '#{@article.title}'has been created!"
   end
 
@@ -39,5 +42,6 @@ end
   def edit
     @article = Article.find(params[:id])
   end  
- 
+
+
 end
